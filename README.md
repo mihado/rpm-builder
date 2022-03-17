@@ -10,16 +10,13 @@ docker build . -t rpm-builder
 
 docker run --rm -it -v ${PWD}/rpmbuild:/home/builder/rpmbuild rpm-builder
 
-# Install dependencies again. Not sure why docker build didn't install them all
-/install-dependencies.sh
+# Note: this switches user to `builder` (cannot build rpm as root)
+/scripts/prepare.sh
 
-# Fix up permissions
-chown -R builder /home/builder
-
-# Build
-sudo su builder
-rpm -i https://kojipkgs.fedoraproject.org//packages/git/2.34.1/1.fc34/src/git-2.34.1-1.fc34.src.rpm
-cd /home/builder/rpmbuild/SPECS && rpmbuild -ba git.spec
+# Example: Build git from using fedora src.rpm
+rpm -i https://kojipkgs.fedoraproject.org//packages/git/2.34.1/1.fc34/src/git-2.34.1-1.fc34.src.rpm && \
+cd /home/builder/rpmbuild/SPECS && \
+rpmbuild -ba git.spec
 ```
 
 ```sh
