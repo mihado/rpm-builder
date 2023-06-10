@@ -6,3 +6,7 @@ rpmbuild/SPECS
 rpmbuild/SRPMS
 
 tmp
+src
+
+# packages
+rpmbuild/ImageMagick*

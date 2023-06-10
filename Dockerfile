@@ -1,14 +1,16 @@
-FROM centos:7
+FROM rockylinux:9.2
 
 RUN groupadd -r mock && \
   useradd -r -g mock mockbuild
 
 RUN groupadd -r builder && \
   useradd -r -g builder builder && \
-  mkdir -p /home/builder/rpmbuild && \
+  mkdir -p /home/builder/src && \
   chown -R builder /home/builder
 
 RUN yum -y groupinstall "Development Tools"
+RUN dnf install -y epel-release
+RUN dnf config-manager --set-enabled crb
 
 COPY ./scripts /scripts
 

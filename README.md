@@ -21,11 +21,25 @@ rpmbuild -ba git.spec
 
 ```sh
 # Try installing in stock CentOS
-docker run --rm -it -v ${PWD}/rpmbuild:/root/rpmbuild centos:7
+docker run --rm -it -v ${PWD}/rpmbuild:/root/rpmbuild rockylinux:9.2
 
 yum install \
   /root/rpmbuild/RPMS/x86_64/git-2.34.1-1.el7.x86_64.rpm \
   /root/rpmbuild/RPMS/x86_64/git-core-2.34.1-1.el7.x86_64.rpm \
   /root/rpmbuild/RPMS/noarch/perl-Git-2.34.1-1.el7.noarch.rpm \
   /root/rpmbuild/RPMS/noarch/git-core-doc-2.34.1-1.el7.noarch.rpm
+```
+
+
+```sh
+# https://blog.packagecloud.io/working-with-source-rpms/
+wget https://mirror.2degrees.nz/fedora/linux/updates/38/Everything/source/tree/Packages/i/ImageMagick-7.1.1.8-1.fc38.src.rpm
+rpm -ivh ImageMagick-7.1.1.8-1.fc38.src.rpm
+
+rpmbuild --recompile ImageMagick-7.1.1.8-1.fc38.src.rpm
+
+dnf install -y doxygen giflib-devel jbigkit-devel libgs-devel urw-base35-fonts-devel openexr-devel bzip2-devel jasper-devel lcms2-devel libheif-devel libjpeg-turbo-devel libjxl-devel libpng-devel libtiff-devel libwebp-devel libwmf-devel libzip-devel pango-devel fftw-devel libXt-devel librsvg2-devel LibRaw-devel djvulibre-devel graphviz-devel openjpeg2-devel libraqm-devel liblqr-1-devel
+
+rpmbuild -bp ImageMagick.spec
+rpmbuild -ba ImageMagick.spec
 ```
