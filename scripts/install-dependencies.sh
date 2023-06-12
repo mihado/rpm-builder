@@ -20,6 +20,7 @@ dnf install -y \
   openssl-devel \
   pcre2-devel \
   perl-devel \
+  python3-devel \
   rpm-build \
   xmlto \
   zlib-devel \

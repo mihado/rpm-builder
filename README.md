@@ -43,3 +43,22 @@ dnf install -y doxygen giflib-devel jbigkit-devel libgs-devel urw-base35-fonts-d
 rpmbuild -bp ImageMagick.spec
 rpmbuild -ba ImageMagick.spec
 ```
+
+
+```sh
+# file-5.44
+docker run --rm -it -v ${PWD}/rpmbuild:/home/builder/rpmbuild rpm-builder
+
+/scripts/prepare.sh
+
+wget https://download.fedoraproject.org/pub/fedora/linux/releases/38/Everything/source/tree/Packages/f/file-5.44-3.fc38.src.rpm
+rpm -ivh file-5.44-3.fc38.src.rpm
+
+rpmbuild --recompile file-5.44-3.fc38.src.rpm
+
+cd /home/builder/rpmbuild/
+rpmbuild -bp file.spec
+rpmbuild -ba file.spec
+
+docker run --rm -it -v ${PWD}/rpmbuild:/root/rpmbuild rockylinux:8.8
+```

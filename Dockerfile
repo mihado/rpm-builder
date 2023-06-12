@@ -1,4 +1,4 @@
-FROM rockylinux:9.2
+FROM rockylinux:8.8
 
 RUN groupadd -r mock && \
   useradd -r -g mock mockbuild
@@ -9,8 +9,10 @@ RUN groupadd -r builder && \
   chown -R builder /home/builder
 
 RUN yum -y groupinstall "Development Tools"
-RUN dnf install -y epel-release
-RUN dnf config-manager --set-enabled crb
+RUN yum makecache --refresh
+
+RUN yum -y install https://download.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN yum-config-manager --enable powertools
 
 COPY ./scripts /scripts
 
