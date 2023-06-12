@@ -8,11 +8,11 @@ RUN groupadd -r builder && \
   mkdir -p /home/builder/src && \
   chown -R builder /home/builder
 
-RUN yum -y groupinstall "Development Tools"
-RUN yum makecache --refresh
-
-RUN yum -y install https://download.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-RUN yum-config-manager --enable powertools
+RUN dnf -y group install "Development Tools"
+RUN dnf -y install https://download.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN dnf -y install dnf-plugins-core
+RUN dnf config-manager --set-enabled powertools
+RUN dnf makecache --refresh
 
 COPY ./scripts /scripts
 

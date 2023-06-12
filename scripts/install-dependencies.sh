@@ -8,7 +8,6 @@ dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 dnf install -y \
   sudo \
   vim \
-  yum-utils \
   git \
   wget \
   make \
