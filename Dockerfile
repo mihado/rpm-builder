@@ -1,10 +1,10 @@
-FROM rockylinux:8.8
+FROM rockylinux:8.9
 
 RUN groupadd -r mock && \
   useradd -r -g mock mockbuild
 
 RUN groupadd -r builder && \
-  useradd -r -g builder builder && \
+  useradd -r -g builder builder -u 1000 && \
   mkdir -p /home/builder/src && \
   chown -R builder /home/builder
 
