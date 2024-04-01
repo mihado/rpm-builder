@@ -2,6 +2,8 @@ default: build
 
 build:
 	docker build . --rm -t mihado/rpm-builder
+
+push: build
 	docker push mihado/rpm-builder
 
 run: build
